@@ -1,0 +1,18 @@
+List p=18f4520 ;???PIC18F4520
+    ;???PIC18F
+    #include<p18f4520.inc>
+        CONFIG OSC = INTIO67
+        CONFIG WDT = OFF
+        org 0x00 ; ???0x00???????
+
+MOVLW b'01010101'
+ANDLW 0xF0
+MOVWF 0x000
+MOVWF 0x002
+
+MOVLW b'01111101'
+ANDLW 0x0F
+MOVWF 0x001
+ADDWF 0x002, F
+
+end
