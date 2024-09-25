@@ -19,7 +19,7 @@ MOVLW 0xD1
 MOVWF 0x005
 MOVLW 0xFE
 MOVWF 0x006
-MOVLW 0x89 ;目標值
+MOVLW 0x89 ;target
 MOVWF 0x010
 
 LFSR 0, 0x000 ;FSR0=0x000
@@ -31,16 +31,16 @@ CPFSGT FSR0L
 GOTO start
 GOTO not_found
 start:
-MOVF FSR0L, W ;計算中間位置
+MOVF FSR0L, W ;calculate the middle position
 ADDWF FSR1L, W
-RRCF WREG, W ;除以2
-MOVWF FSR2L ;FSR2=中間位置
+RRCF WREG, W ;divide by 2
+MOVWF FSR2L ;FSR2=middle position
 MOVF INDF2, W
-CPFSEQ 0x010 ;檢測目標值
+CPFSEQ 0x010 ;detect target
 GOTO not_equal
 GOTO equal
 not_equal:
-CPFSLT 0x010 ;檢測目標值
+CPFSLT 0x010 ;detect target
 GOTO greater
 GOTO less
 equal:
@@ -49,12 +49,12 @@ MOVWF 0x011
 GOTO theend
 greater:
 MOVF FSR2L, W
-MOVWF FSR0L ;更新左界
+MOVWF FSR0L ;update left bound
 INCF FSR0L
 GOTO binarySearch
 less:
 MOVF FSR2L, W
-MOVWF FSR1L ;更新右界
+MOVWF FSR1L ;update right bound
 DECF FSR1L
 GOTO binarySearch
 not_found:
