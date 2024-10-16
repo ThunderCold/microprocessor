@@ -6,7 +6,7 @@ List p=18f4520 ;???PIC18F4520
         org 0x00 ; ???0x00???????
 
 init:
-    MOVLW d'9'
+    MOVLW d'15'
     MOVWF 0x010 ;n
     CLRF 0x011 ;i
     MOVFF 0x010, 0x012 ;0x012 is also n
