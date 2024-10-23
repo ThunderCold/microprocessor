@@ -1,8 +1,8 @@
 #include <xc.h>
-extern unsigned int mysqrt(unsigned int a);
+extern unsigned char mysqrt(unsigned char a);
 
 void main(void) {
-    volatile unsigned int result = mysqrt(10);
+    volatile unsigned int result = mysqrt(50);
     while(1);
     return;
 }
