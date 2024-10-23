@@ -3,6 +3,7 @@ GLOBAL _multi_signed
 PSECT mytext,local,class=CODE,reloc=2
     
 _multi_signed:
+    MOVWF 0x003 ;a
     MOVLW 0x00
     MOVWF BSR
     CLRF 0x020 ;flag
@@ -11,30 +12,30 @@ _multi_signed:
     GOTO check_a
     
 check_a:
-    BTFSS 0x001, 7
+    BTFSS 0x003, 7
     GOTO check_b
-    INCF 0x020
-    COMF 0x001
-    INCF 0x001
-    
-check_b:
-    BTFSS 0x003, 3
-    GOTO mul
     INCF 0x020
     COMF 0x003
     INCF 0x003
     
+check_b:
+    BTFSS 0x001, 3
+    GOTO mul
+    INCF 0x020
+    COMF 0x001
+    INCF 0x001
+    
 mul:
-    BTFSS 0x003, 0
+    BTFSS 0x001, 0
     GOTO check_loop
-    MOVFF 0x001, WREG
+    MOVFF 0x003, WREG
     ADDWF 0x011
     CLRF WREG
     ADDWFC 0x010
     
 check_loop:
     BCF STATUS, 0
-    RRCF 0x003
+    RRCF 0x001
     BCF STATUS, 0
     RRCF 0x010
     RRCF 0x011
@@ -65,7 +66,7 @@ check_sign:
     GOTO done
     
 done:
-    MOVFF 0x010, 0x000
+    MOVFF 0x010, 0x002
     MOVFF 0x011, 0x001
     RETURN
     
