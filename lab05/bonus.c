@@ -1,5 +1,5 @@
 #include <xc.h>
-extern unsigned int multi_signed(unsigned int a, unsigned int b);
+extern unsigned int multi_signed(unsigned char a, unsigned char b);
 
 void main(void) {
     volatile unsigned int result = multi_signed(127, -6);
